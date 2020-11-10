@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="col">
+    <h2>Registro</h2>
+
+    <!--Formulario, form django que se crean a partir de clases-->
+    <form method="post">
+        {% csrf_token %}
+        <!-- 
+        <div class="form-group">
+            {{form.username.label_tag}}
+            {{ form.username}}
+        </div>
+        <div class="form-group">
+            {{form.email.label_tag}}
+            {{ form.email}}
+        </div>
+        <div class="form-group">
+            {{form.password.label_tag}}
+            {{ form.password}}
+        </div>
+        --><!-- form simplificado para mostrar todos los campos del form-->
+        {% for field in form%}
+        <div class="form-group">
+            {{field.label_tag}}
+            {{field}}
+
+            <!--para mostrar los errores me apoyo en el atributo erros que posee el campo-->
+            {% if field.errors %}
+                {{ field.errors }}<!--aqui como imprimo el mensaje-->
+            {% endif %}
+        </div>
+        {% endfor%}
+
+        <button type="submit" class="btn btn-primary">Registrar</button>
+        
+    </form>
+    
+</div>
+{% endblock %}
